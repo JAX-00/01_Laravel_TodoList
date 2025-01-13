@@ -7,13 +7,13 @@ use App\Services\UserService;
 class UserServiceImpl implements UserService
 {
 
-    private array $user = [
+    private array $users = [
         "juby" => "rahasia"
     ];
 
     function login(string $user, string $password): bool
     {
-        if (isset($this->users[$user])) {
+        if (!isset($this->users[$user])) {
             return false;
         }
 
