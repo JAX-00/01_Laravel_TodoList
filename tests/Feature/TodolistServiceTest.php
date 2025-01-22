@@ -60,4 +60,33 @@ class TodolistServiceTest extends TestCase
 
         self::assertEquals($expected, $this->todolistService->getTodolist());
     }
+
+
+    public function testRemoveTodo()
+    {
+        $this->todolistService->saveTodo("1", "Juby");
+        $this->todolistService->saveTodo("2", "ZW");
+
+        self::assertEquals(2, sizeof($this->todolistService->getTodolist()));
+
+        // if remove data in id 3
+        $this->todolistService->removeTodo("3");
+
+        //we still have two data because id 3 none exist in out data
+
+        self::assertEquals(2, sizeof($this->todolistService->getTodolist()));
+
+        // if remove data in id 1
+        $this->todolistService->removeTodo("1");
+
+        // we will see only one data
+        self::assertEquals(1, sizeof($this->todolistService->getTodolist()));
+
+
+        // if remove data in id 2
+        $this->todolistService->removeTodo("2");
+
+        // all of data have been remove
+        self::assertEquals(0, sizeof($this->todolistService->getTodolist()));
+    }
 }

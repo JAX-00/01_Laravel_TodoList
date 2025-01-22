@@ -20,3 +20,11 @@ Route::controller(\App\Http\Controllers\UserController::class)->group(function (
     // when click Logout will be direct to User controller with function doLogout to proses logout.
     Route::post('/logout', 'doLogout')->middleware([\App\Http\Middleware\OnlyMemberMiddleware::class]);
 });
+
+// because we have middleware same we used that
+
+Route::controller(\App\Http\Controllers\TodolistController::class)->middleware([\App\Http\Middleware\OnlyMemberMiddleware::class])->group(function () {
+    Route::get('/todolist', 'todolist');
+    Route::post('/todolist', 'addTodo');
+    Route::post('/todolist/{id}/delete', 'removeTodo');
+});
