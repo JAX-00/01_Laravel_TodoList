@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\Impl\TodolistServiceImpl;
 use App\Services\TodolistService;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
@@ -9,7 +10,7 @@ use Illuminate\Support\ServiceProvider;
 class TodoListServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     public array $singletons = [
-        TodolistService::class =>  TodolistService::class
+        TodolistService::class => TodolistServiceImpl::class
     ];
 
     public function provides(): array
@@ -17,18 +18,11 @@ class TodoListServiceProvider extends ServiceProvider implements DeferrableProvi
         return [TodolistService::class];
     }
 
-
-    /**
-     * Register services.
-     */
     public function register(): void
     {
-        //
+        // Jika menggunakan $singletons, Anda tidak perlu binding tambahan di sini.
     }
 
-    /**
-     * Bootstrap services.
-     */
     public function boot(): void
     {
         //
