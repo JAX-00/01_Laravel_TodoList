@@ -89,4 +89,20 @@ class TodolistServiceTest extends TestCase
         // all of data have been remove
         self::assertEquals(0, sizeof($this->todolistService->getTodolist()));
     }
+    public function testRemoveTodolist()
+    {
+        $this->withSession([
+            "user" => "juby",
+            "todolist" => [
+                [
+                    "id" => "1",
+                    "todo" => "Eko"
+                ],
+                [
+                    "id" => "2",
+                    "todo" => "juby"
+                ]
+            ]
+        ])->post("/todolist/1/delete")->assertRedirect("/todolist");
+    }
 }
